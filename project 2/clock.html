@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+</head>
+<body>
+    <div class="clock">
+        <div class="clock-face">
+            <div class="hand second-hand"></div>
+            <div class="hand minute-hand"></div>
+            <div class="hand hour-hand"></div>
+        </div>
+    </div>
+
+  <style>
+    html {
+      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background-size: cover;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      font-size:10px;
+      
+    }
+    body{
+        padding: 0px;
+        margin: 0px;
+        font-size: 2rem;
+        min-height: 100vh;
+        display: flex;
+        flex: 1;
+        align-items: center;
+    }
+    .clock{
+        height: 30rem;
+        width: 30rem;
+        border: 20px solid white;
+        border-radius: 50%;
+        margin: 50px auto;
+        position:relative;
+    }
+
+    .hand{
+        position:absolute;
+        height: 6px;
+        width:50%;
+        top:50%;
+        background:black;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: all 0.05sec;
+    }
+
+
+  </style>
+  <script>
+    const secondhand=document.querySelector(".second-hand");
+    const minutehand=document.querySelector(".minute-hand");
+    const hourhand=document.querySelector(".hour-hand");
+    function setDate(){
+        const now =new Date();
+        const seconds=now.getSeconds();
+        const minutes=now.getMinutes();
+        const hour=now.getHours();
+        const rotatesec= ((seconds/60)*360)+90;
+        secondhand.style.transform=`rotate(${rotatesec}deg)`;
+        const rotatemin= ((minutes/60)*360)+90;
+        minutehand.style.transform=`rotate(${rotatemin}deg)`;
+        const rotatehour= ((hour/12)*360)+90;
+        hourhand.style.transform=`rotate(${rotatehour}deg)`;
+    }
+    setInterval(setDate,1000);
+
+
+  </script>
+</body>
+</html>
